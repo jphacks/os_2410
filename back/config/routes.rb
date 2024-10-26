@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   get '/users/:id/action', to: 'action_logs#user_actions'
 
   # 当日の食事ログを取得
-  get '/users/:id/meal', to: 'action_logs#meal_logs'
+  get '/users/:user_id/meal', to: 'action_logs#meal_logs'
 end
