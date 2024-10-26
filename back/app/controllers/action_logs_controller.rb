@@ -16,8 +16,12 @@ class ActionLogsController < ApplicationController
     if @action_log.save
       # キャラクターの寿命やステータスを更新（例: 行動に応じて寿命を変更）
       character = @action_log.character
-      character.lifespan += @action_log.effect_on_lifespan
-      character.save
+
+      character_hp_service = CharacterHpService.new(character)
+      character_hp_service.update_hp(@action_log.action_type, @action_log.detail)
+
+      character_lifespan_service = CharacterLifespanService.new(character)
+      character_lifespan_service.update_lifespan(@action_log.action_type, @action_log.detail, character.status)
 
       render json: @action_log, status: :created
     else
