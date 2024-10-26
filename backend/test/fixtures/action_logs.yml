@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  character: one
+  action_type: MyString
+  description: MyString
+  effect_on_lifespan: 1
+
+two:
+  user: two
+  character: two
+  action_type: MyString
+  description: MyString
+  effect_on_lifespan: 1
