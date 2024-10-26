@@ -6,7 +6,7 @@ def check_dead(character,user):
     created_at = datetime.datetime.fromisoformat(character["created_at"])
     lifespan = character["lifespan"]
     if datetime.datetime.now() > created_at + datetime.timedelta(days=lifespan):
-        character["status"] = 0
+        character["status"] = 0 # 0:死亡
         character["last_updated"] = datetime.datetime.now().isoformat()
         return True
     return False
