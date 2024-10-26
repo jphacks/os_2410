@@ -16,5 +16,6 @@ class Auth::RegistrationsController < DeviseTokenAuth::RegistrationsController
     token = @resource.create_new_auth_token
     response.set_header('access-token', token['access-token'])
     response.set_header('client', token['client'])
+    
   end
 end
