@@ -2,10 +2,13 @@ class CharactersController < ApplicationController
   # 特定のキャラクター情報を取得
   def show
     @character = Character.find(params[:id])
+    user = @character.user
     # TODO: 今日初めてログインしたかどうか判定
-    @character.update_age
-    # 死亡判定をサービス層から処理する
-    @character.update_characters_status_by_lifespan
+    if UserLoginCheck.check_first_login(user) then
+      @character.update_age
+      # 死亡判定をサービス層から処理する
+      @character.update_characters_status_by_lifespan
+    end
     render json: @character
   end
 
