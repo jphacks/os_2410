@@ -183,42 +183,6 @@ export function Home() {
             </div>
           </div>
         )}
-
-        {/* キャラクター表示エリア - 変更なし */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center">
-            キャラクター
-          </div>
-        </div>
-
-        {/* モーダル */}
-        {selectedAction && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-              <h3 className="text-lg font-semibold mb-4">
-                {selectedAction.type}の詳細を選択
-              </h3>
-              <div className="space-y-2">
-                {selectedAction.details.map((detail) => (
-                  <button
-                    key={detail.value}
-                    onClick={() => handleActionDetailSelect(detail.value)}
-                    className="w-full p-3 text-left hover:bg-gray-100 rounded-lg transition-colors"
-                  >
-                    {detail.label}
-                  </button>
-                ))}
-              </div>
-              <button
-                onClick={() => setSelectedAction(null)}
-                className="mt-4 w-full p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
-              >
-                キャンセル
-              </button>
-              </div>
-            </div>
-          )}
-
         {/* // キャラクター表示エリアで画像を差し替える */}
         <div className="flex-1 flex items-center justify-center">
           {/* モックキャラクター */}
@@ -229,9 +193,6 @@ export function Home() {
             <CharacterImages character={currentCharacter} />
           </div>
         </div>
-
-        
-        
       </div>
 
       {/* アニメーションエフェクト用のコンテナ（オプション） */}

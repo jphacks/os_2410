@@ -79,16 +79,10 @@ function CharacterImage({ character }: { character: Character }) {
         alt="character"
         style={{
           transition: 'transform 0.5s ease-in-out',
-          // transform: isAnimated ? 'skewX(100) skewY(100)' : 'none',
-          transform: isAnimated
-            ? `translate(${mousePosition.x - x}px,${mousePosition.y - y}px)`
-            : 'none',
+          transform: `translate(${mousePosition.x - x}px,${mousePosition.y - y}px)`,
         }}
         onClick={handleClick}
       />
-      <div>
-        マウスの現在の座標: ({mousePosition.x}, {mousePosition.y})
-      </div>
     </div>
   );
 }
