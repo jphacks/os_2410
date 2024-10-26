@@ -8,15 +8,31 @@ interface ImageMap {
   [key: number]: string; // HPの範囲と画像パスの対応
 }
 
-const imageMap: ImageMap = {
-  0: '/src/assets/images/tako_older_normal.png', // HPが5未満のとき
-  5: '/src/assets/images/tako_yonger_normal.png', // HPが5以上のとき
-  10: '/src/assets/images/tako_baby_normal.png', // HPが10以上のとき
+const babyImage = {
+  0: '/src/assets/images/tako_baby_sad.png', // HPが5未満のとき
+  5: '/src/assets/images/tako_baby_normal.png', // HPが5以上のとき
+  10: '/src/assets/images/tako_baby_happy.png', // HPが10以上のとき
 };
+
+const yongerImage = {
+  0: '/src/assets/images/tako_baby_sad.png', // HPが5未満のとき
+  5: '/src/assets/images/tako_baby_normal.png', // HPが5以上のとき
+  10: '/src/assets/images/tako_baby_happy.png', // HPが10以上のとき
+};
+
+const olderImage = {
+  0: '/src/assets/images/tako_older_sad.png', // HPが5未満のとき
+  5: '/src/assets/images/tako_older_normal.png', // HPが5以上のとき
+  10: '/src/assets/images/tako_older_happy.png', // HPが10以上のとき
+};
+
+// 寿命を基準にif文で分岐する
+const imageMap: ImageMap = babyImage;
 
 let x, y;
 
 function CharacterImage({ character }: { character: Character }) {
+
   const myRef = useRef<HTMLDivElement>(null);
 
   const [currentImage, setCurrentImage] = useState<string>(
@@ -43,7 +59,6 @@ function CharacterImage({ character }: { character: Character }) {
     x = rect.x;
     console.log('y:', rect.y);
     y = rect.y;
-    // ... その他の属性も利用可能
   }
 
   useEffect(() => {
@@ -71,6 +86,21 @@ function CharacterImage({ character }: { character: Character }) {
     setIsAnimated(!isAnimated);
   };
 
+  // console.log(window.innerWidth)
+
+  let char_x, char_y;
+
+  if(+(window.innerWidth/2)>=mousePosition.x){
+    char_x = mousePosition.x - x;
+  }else{
+    char_x = mousePosition.x - x - 125;
+  }
+  if(+(window.innerHeight/2)>=mousePosition.y){
+    char_y = mousePosition.y - y;
+  }else{
+    char_y = mousePosition.y - y - 100;
+  }
+
   return (
     <div ref={myRef}>
       <img
@@ -79,7 +109,7 @@ function CharacterImage({ character }: { character: Character }) {
         alt="character"
         style={{
           transition: 'transform 0.5s ease-in-out',
-          transform: `translate(${mousePosition.x - x}px,${mousePosition.y - y}px)`,
+          transform: `translate(${char_x}px,${char_y}px)`,
         }}
         onClick={handleClick}
       />

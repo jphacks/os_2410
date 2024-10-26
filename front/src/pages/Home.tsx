@@ -57,8 +57,8 @@ export function Home() {
   };
 
   return (
-    <div className="absolute inset-0 bg-gray-100">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-200 to-blue-400" />
+    <div className="absolute inset-0 bg-no-repeat bg-cover bg-center bg-[url('/src/assets/images/background.png')]">
+      <div className="absolute inset-0"  />
 
       <div className="relative h-full flex flex-col">
         {/* ステータス表示（右上） - 変更なし */}

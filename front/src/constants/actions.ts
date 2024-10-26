@@ -25,7 +25,7 @@ export const GAME_ACTIONS: GameAction[] = [
     description: 'HPが回復し、寿命が延びます',
     position: 'right',
     order: 1,
-    imagePath: '/src/assets/images/bed.png', // 各アクションの画像パス
+    imagePath: '/src/assets/images/kitchen.png', // 各アクションの画像パス
     details: [
       { label: 'ちゃんと取った', value: 'ちゃんと取った', description: "栄養バランスの整った食事をした" },
       { label: '軽い食事', value: '軽い食事' , description: "おやつとかパン１個とか"},
@@ -52,7 +52,7 @@ export const GAME_ACTIONS: GameAction[] = [
     description: 'HPが回復しますが、寿命が減ります',
     position: 'bottom',
     order: 1,
-    imagePath: '/src/assets/images/bed.png', // 各アクションの画像パス
+    imagePath: '/src/assets/images/door.png', // 各アクションの画像パス
     details: [
       { label: '軽い運動', value: '軽い運動' , description: ""},
       { label: '適度な運動', value: '適度な運動' , description: ""},

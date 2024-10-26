@@ -14,7 +14,7 @@ export function ActionButton({ action, onClick }: ActionButtonProps) {
       <img
         src={action.imagePath}
         alt={`${action.type}のアイコン`}
-        className="absolute inset-0 w-full h-full object-cover
+        className="absolute inset-0
           rounded-lg
           md:rounded-xl
           lg:rounded-2xl
