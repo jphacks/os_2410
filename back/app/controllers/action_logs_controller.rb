@@ -32,12 +32,12 @@ class ActionLogsController < ApplicationController
   # 当日の食事ログを取得
   def meal_logs
     @user = User.find(params[:user_id])
-    @today_action_types = @user.action_type.where(created_at: Time.zone.now.all_day)
+    @today_action_logs = @user.action_logs.where(created_at: Time.zone.now.all_day)
     meal_logs = {
-      morning: @today_action_types.exists?(action_type: '朝食'),
-      afternoon: @today_action_types.exists?(action_type: '昼食'),
-      night: @today_action_types.exists?(action_type: '夕食'),
-      other: @today_action_types.exists?(action_type: '軽食')
+      morning: @today_action_logs.exists?(action_type: '朝食'),
+      afternoon: @today_action_logs.exists?(action_type: '昼食'),
+      night: @today_action_logs.exists?(action_type: '夕食'),
+      other: @today_action_logs.exists?(action_type: '軽食')
     }
 
     render json: meal_logs
