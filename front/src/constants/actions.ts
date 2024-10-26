@@ -52,7 +52,7 @@ export const GAME_ACTIONS: GameAction[] = [
     description: 'HPが回復しますが、寿命が減ります',
     position: 'bottom',
     order: 1,
-    imagePath: '/src/assets/images/door.png', // 各アクションの画像パス
+    imagePath: '/src/assets/images/exercise.png', // 各アクションの画像パス
     details: [
       { label: '軽い運動', value: '軽い運動' , description: ""},
       { label: '適度な運動', value: '適度な運動' , description: ""},
