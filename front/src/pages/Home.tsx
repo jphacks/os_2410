@@ -65,8 +65,8 @@ export function Home() {
   };
 
   return (
-    <div className="absolute inset-0 bg-gray-100">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-200 to-blue-400" />
+    <div className="absolute inset-0 bg-no-repeat bg-cover bg-center bg-[url('/src/assets/images/background.png')]">
+      <div className="absolute inset-0"  />
 
       <div className="relative h-full flex flex-col">
         {/* ステータス表示（右上） - 変更なし */}
@@ -113,7 +113,7 @@ export function Home() {
         </div>
 
         {/* 左側のアクション */}
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
+        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 w-1/2">
           {getActionsByPosition('left').map((action) => (
             <ActionButton
               key={action.type}
