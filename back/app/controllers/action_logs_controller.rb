@@ -47,6 +47,6 @@ class ActionLogsController < ApplicationController
 
   # Strong Parameters
   def action_log_params
-    params.require(:action_log).permit(:action_type, :detail, :user_id, :character_id)
+    params.permit(:action_type, :detail, :user_id, :character_id)
   end
 end

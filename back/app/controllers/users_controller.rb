@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 
   # ユーザー登録/更新のパラメータ
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation,:name)
+    params.permit(:email, :password, :password_confirmation,:username)
   end
 end
 

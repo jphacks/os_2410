@@ -53,6 +53,6 @@ class CharactersController < ApplicationController
 
   # Strong Parameters
   def character_params
-    params.require(:character).permit(:character_name)
+    params.permit(:character_name)
   end
 end
