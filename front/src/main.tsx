@@ -1,13 +1,19 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route, Navigate } from 'react-router-dom'
-import { CharacterProvider } from './contexts/CharacterContext'
-import { Layout } from './components/Layout'
-import { Home } from './pages/Home'
-import { Create } from './pages/Create'
-import { ErrorPage } from './pages/ErrorPage'
-import './index.css'
-import { MyPage } from './pages/MyPage'
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+import { CharacterProvider } from './contexts/CharacterContext';
+import { Layout } from './components/Layout';
+import { Home } from './pages/Home';
+import { Create } from './pages/Create';
+import { ErrorPage } from './pages/ErrorPage';
+import './index.css';
+import { MyPage } from './pages/MyPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,10 +39,10 @@ const router = createBrowserRouter(
           return { name: formData.get('name') };
         }}
       />
-       <Route path="my-page" element={<MyPage />} />
+      <Route path="my-page" element={<MyPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 createRoot(document.getElementById('root')!).render(
@@ -45,4 +51,4 @@ createRoot(document.getElementById('root')!).render(
       <RouterProvider router={router} />
     </CharacterProvider>
   </React.StrictMode>,
-)
+);

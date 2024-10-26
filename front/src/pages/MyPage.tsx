@@ -6,7 +6,8 @@ import { UserProfile } from '../components/UserProfile';
 import { ActionHistorySection } from '../components/ActionHistorySection';
 
 export function MyPage() {
-  const { fetchUserCharacters, currentCharacter, isLoading, error } = useCharacter();
+  const { fetchUserCharacters, currentCharacter, isLoading, error } =
+    useCharacter();
   const userId = 1; // 実際の実装では認証から取得
 
   useEffect(() => {
@@ -39,8 +40,3 @@ export function MyPage() {
     </div>
   );
 }
-
-
-
-
-
