@@ -1,29 +1,29 @@
 import { Navigate } from 'react-router-dom';
 import { useCharacter } from '../contexts/CharacterContext';
 import { useEffect, useState } from 'react';
+import CharacterImages from '../components/CharacterImages';
 
 export function Home() {
-  const { currentCharacter, fetchUserCharacters, performAction } = useCharacter();
+  const { currentCharacter, fetchUserCharacters, performAction } =
+    useCharacter();
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const userId = 1; // 実際の実装では認証から取得
 
-  console.log("currentCharacter: ", currentCharacter);
+  console.log('currentCharacter: ', currentCharacter);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         await fetchUserCharacters(userId);
       } catch (error) {
-        console.error("Failed to fetch characters: ", error);
+        console.error('Failed to fetch characters: ', error);
       } finally {
         setIsInitialLoading(false);
       }
-    }
+    };
 
     fetchData();
   }, [userId, fetchUserCharacters]);
-
- 
 
   if (isInitialLoading) {
     return (
@@ -34,9 +34,21 @@ export function Home() {
   }
 
   const actions = [
-    { type: '食事' as const, icon: '🍖', description: 'HPが回復し、寿命が延びます' },
-    { type: '睡眠' as const, icon: '😴', description: 'HPが大きく回復し、寿命が延びます' },
-    { type: '運動' as const, icon: '🏃', description: 'HPが回復しますが、寿命が減ります' },
+    {
+      type: '食事' as const,
+      icon: '🍖',
+      description: 'HPが回復し、寿命が延びます',
+    },
+    {
+      type: '睡眠' as const,
+      icon: '😴',
+      description: 'HPが大きく回復し、寿命が延びます',
+    },
+    {
+      type: '運動' as const,
+      icon: '🏃',
+      description: 'HPが回復しますが、寿命が減ります',
+    },
   ];
 
   if (!currentCharacter) {
@@ -58,12 +70,16 @@ export function Home() {
             <div>
               <div className="flex justify-between items-center mb-1">
                 <span className="text-sm font-medium">HP</span>
-                <span className="text-sm">{currentCharacter.health_points}/10</span>
+                <span className="text-sm">
+                  {currentCharacter.health_points}/10
+                </span>
               </div>
               <div className="w-32 h-2 bg-gray-200 rounded-full">
                 <div
                   className="h-full bg-green-500 rounded-full transition-all duration-300"
-                  style={{ width: `${(currentCharacter.health_points / 10) * 100}%` }}
+                  style={{
+                    width: `${(currentCharacter.health_points / 10) * 100}%`,
+                  }}
                 />
               </div>
             </div>
@@ -82,11 +98,14 @@ export function Home() {
           </div>
         </div>
 
-        {/* キャラクター表示エリア（中央） */}
+        {/* // キャラクター表示エリアで画像を差し替える */}
         <div className="flex-1 flex items-center justify-center">
           {/* モックキャラクター */}
-          <div className="w-32 h-32 bg-gray-300 rounded-full flex items-center justify-center">
-            キャラクター
+          <div
+            className="w-32 h-32 rounded-full flex items-center justify-center"
+            id="myImage"
+          >
+            <CharacterImages character={currentCharacter} />
           </div>
         </div>
 
@@ -94,7 +113,7 @@ export function Home() {
         <div className="p-4">
           <div className="max-w-md mx-auto bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4">
             <div className="grid grid-cols-3 gap-3">
-              {actions.map(action => (
+              {actions.map((action) => (
                 <button
                   key={action.type}
                   onClick={() => performAction(action.type)}
@@ -113,7 +132,10 @@ export function Home() {
       </div>
 
       {/* アニメーションエフェクト用のコンテナ（オプション） */}
-      <div className="pointer-events-none absolute inset-0" id="effects-container" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        id="effects-container"
+      />
     </div>
   );
 }

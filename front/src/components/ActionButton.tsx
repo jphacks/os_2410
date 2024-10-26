@@ -6,14 +6,14 @@ export function ActionButtons() {
   const actions = [
     { type: '食事' as const, detail: '食事をとる', icon: '🍖' },
     { type: '睡眠' as const, detail: '睡眠をとる', icon: '😴' },
-    { type: '運動' as const, detail: '運動をする', icon: '🏃' }
+    { type: '運動' as const, detail: '運動をする', icon: '🏃' },
   ];
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-xl font-bold mb-4">アクション</h2>
       <div className="grid gap-4">
-        {actions.map(action => (
+        {actions.map((action) => (
           <button
             key={action.type}
             onClick={() => performAction(action.type, action.detail)}

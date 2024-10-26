@@ -7,7 +7,9 @@ export function CharacterStatus() {
 
   return (
     <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-xl font-bold mb-4">{currentCharacter.character_name}</h2>
+      <h2 className="text-xl font-bold mb-4">
+        {currentCharacter.character_name}
+      </h2>
       <div className="space-y-4">
         <div>
           <div className="flex justify-between mb-1">
@@ -17,7 +19,9 @@ export function CharacterStatus() {
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
               className="bg-green-600 h-2 rounded-full"
-              style={{ width: `${(currentCharacter.health_points / 10) * 100}%` }}
+              style={{
+                width: `${(currentCharacter.health_points / 10) * 100}%`,
+              }}
             />
           </div>
         </div>
