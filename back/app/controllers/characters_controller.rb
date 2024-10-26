@@ -2,6 +2,7 @@ class CharactersController < ApplicationController
   # 特定のキャラクター情報を取得
   def show
     @character = Character.find(params[:id])
+    # TODO 死亡判定をサービス層から処理する
     render json: @character
   end
 
@@ -15,7 +16,10 @@ class CharactersController < ApplicationController
   # キャラクターを新規作成
   def create
     @character = Character.new(character_params)
-    @character.user_id = params[:user_id] # user_idがリクエストで渡される場合
+    @character.user_id = params[:user_id]
+    @character.age = 0
+    @character.lifespan = 7
+    @character.health_points = 8
 
     if @character.save
       render json: @character, status: :created
@@ -46,6 +50,6 @@ class CharactersController < ApplicationController
 
   # Strong Parameters
   def character_params
-    params.require(:character).permit(:character_name, :age, :lifespan, :health_points)
+    params.require(:character).permit(:character_name)
   end
 end
