@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_26_130843) do
+ActiveRecord::Schema[7.0].define(version: 2024_10_26_181811) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_26_130843) do
     t.string "action_type"
     t.string "detail"
     t.datetime "created_at", null: false
+    t.float "hp_movement"
+    t.float "lifespan_movement"
     t.index ["character_id"], name: "index_action_logs_on_character_id"
     t.index ["user_id"], name: "index_action_logs_on_user_id"
   end
@@ -42,8 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_26_130843) do
     t.float "health_points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "hp_movement"
-    t.float "lifespan_movement"
     t.integer "status"
     t.index ["user_id"], name: "index_characters_on_user_id"
   end
