@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
   # 当日の食事ログを取得
   get '/users/:user_id/meal', to: 'action_logs#meal_logs'
+
+  # 特定のキャラクターに関連する行動ログを取得
+  get '/characters/:character_id/action_logs', to: 'action_logs#index_by_character'
 end

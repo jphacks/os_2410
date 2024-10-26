@@ -3,7 +3,7 @@ class CharactersController < ApplicationController
   def show
     @character = Character.find(params[:id])
     user = @character.user
-    # TODO: 今日初めてログインしたかどうか判定
+    # 今日初めてログインしたかどうか判定
     if UserLoginCheck.check_first_login(user) then
       @character.update_age
       # 死亡判定をサービス層から処理する
