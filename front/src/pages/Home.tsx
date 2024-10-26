@@ -95,7 +95,7 @@ export function Home() {
 
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
           {GAME_ACTIONS.map((action) => (
-            <ActionButton action={action} onClick={handleActionSelect} />
+            <ActionButton key={action.type} action={action} onClick={handleActionSelect} />
           ))}
         </div>
 
