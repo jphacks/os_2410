@@ -9,9 +9,10 @@ class ActionLogsController < ApplicationController
   # 行動ログを新規作成
   def create
     @action_log = ActionLog.new(action_log_params)
-    @action_log.user_id = params[:user_id] # user_idがリクエストで渡される場合
-    @action_log.character_id = params[:character_id] # character_idがリクエストで渡される場合
+    # @action_log.user_id = params[:user_id] # user_idがリクエストで渡される場合
+    # @action_log.character_id = params[:character_id] # character_idがリクエストで渡される場合
 
+    # 行動による寿命やHPの変化を計算
     if @action_log.save
       # キャラクターの寿命やステータスを更新（例: 行動に応じて寿命を変更）
       character = @action_log.character
@@ -28,6 +29,6 @@ class ActionLogsController < ApplicationController
 
   # Strong Parameters
   def action_log_params
-    params.require(:action_log).permit(:action_type, :description, :effect_on_lifespan, :user_id, :character_id)
+    params.require(:action_log).permit(:action_type, :detail, :user_id, :character_id)
   end
 end
