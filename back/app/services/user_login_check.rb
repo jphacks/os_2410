@@ -1,13 +1,17 @@
 
 require 'date'
 
+# ユーザーがその日初めてログインしたかどうかを判定する
 def check_first_login(user)
-    day = Date.today
+  # ユーザーが最後にログインした日付を取得
+  login_date = user.last_login
 
-    if user.last_sign_in_at.nil?
-        user.last_login = day
-        user.save
-        return true
-    else
-    end
+  # ユーザーがログインした日付が今日の日付と一致するかどうかを判定
+  if login_date == Date.today
+    # 一致する場合はfalseを返す
+    return false
+  else
+    # 一致しない場合はtrueを返す
+    return true
+  end
 end
