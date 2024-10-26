@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 import datetime
+from flask_cors import CORS
 from character_manage import check_dead
 app = Flask(__name__)
+CORS(app)
 
 # モックデータ
 users = [
