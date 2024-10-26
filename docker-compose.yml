@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: 
+      context: ./front
+      dockerfile: ../docker/front/Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=${API_URL:-http://localhost:3000}
+    command: npm run dev
+  db:
+    image: postgres:latest
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
+      - ./db/logs:/var/log
+    environment:
+      # - POSTGRES_HOST_AUTH_METHOD=trust
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "15432:5432"
+  api:
+    build: ./back/
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    image: api
+    volumes:
+      - ./back:/backend
+    environment:
+      RAILS_ENV: development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db

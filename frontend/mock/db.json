@@ -1,0 +1,754 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "test_user1",
+      "email": "test1@example.com",
+      "password": "$2a$10$xX5kX5kX5kX5kX5kX5kX5O5kX5kX5kX5kX5kX5kX5kX5kX5kX5k",
+      "created_at": "2024-01-01T00:00:00Z",
+      "last_login": "2024-01-15T12:30:00Z"
+    },
+    {
+      "id": "2",
+      "username": "test_user2",
+      "email": "test2@example.com",
+      "password": "$2a$10$yY6kY6kY6kY6kY6kY6kY6O6kY6kY6kY6kY6kY6kY6kY6kY6kY6k",
+      "created_at": "2024-01-02T00:00:00Z",
+      "last_login": "2024-01-16T15:45:00Z"
+    }
+  ],
+  "characters": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "character_name": "テストキャラ1",
+      "age": 20,
+      "lifespan": 100,
+      "health_points": 100,
+      "last_updated": "2024-01-15T12:30:00Z"
+    },
+    {
+      "id": "2",
+      "user_id": 1,
+      "character_name": "テストキャラ2",
+      "age": 25,
+      "lifespan": 205,
+      "health_points": 100,
+      "last_updated": "2024-10-24T05:10:41.289Z"
+    },
+    {
+      "id": "3",
+      "user_id": 2,
+      "character_name": "テストキャラ3",
+      "age": 18,
+      "lifespan": 100,
+      "health_points": 100,
+      "last_updated": "2024-01-16T15:45:00Z"
+    },
+    {
+      "id": "bfb1",
+      "user_id": 1,
+      "character_name": "ひとりめ",
+      "age": 20,
+      "lifespan": 100,
+      "health_points": 100,
+      "is_alive": true,
+      "last_updated": "2024-10-24T08:00:52.132Z"
+    }
+  ],
+  "action_logs": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "character_id": 1,
+      "action_type": "食事",
+      "description": "健康的な食事を摂取",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-01-15T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "user_id": 1,
+      "character_id": 1,
+      "action_type": "睡眠",
+      "description": "十分な睡眠を取得",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-01-15T22:00:00Z"
+    },
+    {
+      "id": "3",
+      "user_id": 1,
+      "character_id": 2,
+      "action_type": "運動",
+      "description": "ジョギングを30分実施",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-01-15T18:00:00Z"
+    },
+    {
+      "id": "4",
+      "user_id": 2,
+      "character_id": 3,
+      "action_type": "食事",
+      "description": "不健康な食事を摂取",
+      "effect_on_lifespan": -1,
+      "action_time": "2024-01-16T15:30:00Z"
+    },
+    {
+      "id": "66d2",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:08.003Z"
+    },
+    {
+      "id": "10a3",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:08.697Z"
+    },
+    {
+      "id": "8c25",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:09.315Z"
+    },
+    {
+      "id": "20f9",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:09.783Z"
+    },
+    {
+      "id": "802a",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:10.200Z"
+    },
+    {
+      "id": "5b8a",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:10.533Z"
+    },
+    {
+      "id": "ab14",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:10.796Z"
+    },
+    {
+      "id": "2799",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:10.995Z"
+    },
+    {
+      "id": "714f",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:11.216Z"
+    },
+    {
+      "id": "7940",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:11.430Z"
+    },
+    {
+      "id": "5f9f",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:11.914Z"
+    },
+    {
+      "id": "fd75",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "運動",
+      "description": "運動を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:12.646Z"
+    },
+    {
+      "id": "adab",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "運動",
+      "description": "運動を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:13.067Z"
+    },
+    {
+      "id": "cbe6",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "運動",
+      "description": "運動を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:13.282Z"
+    },
+    {
+      "id": "e81e",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "運動",
+      "description": "運動を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:13.480Z"
+    },
+    {
+      "id": "5a6f",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:14.013Z"
+    },
+    {
+      "id": "8d68",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:14.262Z"
+    },
+    {
+      "id": "158c",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:15.363Z"
+    },
+    {
+      "id": "4528",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:15.564Z"
+    },
+    {
+      "id": "9790",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:16.146Z"
+    },
+    {
+      "id": "5cbc",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:28.600Z"
+    },
+    {
+      "id": "9f27",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:28.848Z"
+    },
+    {
+      "id": "b963",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:29.063Z"
+    },
+    {
+      "id": "d6c0",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:29.517Z"
+    },
+    {
+      "id": "dfcb",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:29.732Z"
+    },
+    {
+      "id": "048c",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:29.965Z"
+    },
+    {
+      "id": "2a18",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:30.246Z"
+    },
+    {
+      "id": "44c0",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:30.447Z"
+    },
+    {
+      "id": "d567",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:30.661Z"
+    },
+    {
+      "id": "335f",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:30.850Z"
+    },
+    {
+      "id": "e7b7",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:31.042Z"
+    },
+    {
+      "id": "57ba",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:31.260Z"
+    },
+    {
+      "id": "3861",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:31.449Z"
+    },
+    {
+      "id": "9c08",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:31.616Z"
+    },
+    {
+      "id": "5cf1",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:31.813Z"
+    },
+    {
+      "id": "4853",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:32.012Z"
+    },
+    {
+      "id": "b923",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:32.180Z"
+    },
+    {
+      "id": "b4e8",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:32.382Z"
+    },
+    {
+      "id": "0d06",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:32.545Z"
+    },
+    {
+      "id": "1eb3",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:32.695Z"
+    },
+    {
+      "id": "8002",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:32.828Z"
+    },
+    {
+      "id": "0f7d",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:32.961Z"
+    },
+    {
+      "id": "a972",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:33.111Z"
+    },
+    {
+      "id": "cd84",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:33.244Z"
+    },
+    {
+      "id": "a9e1",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:33.363Z"
+    },
+    {
+      "id": "ea12",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:33.496Z"
+    },
+    {
+      "id": "301c",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:33.631Z"
+    },
+    {
+      "id": "ad6a",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:33.745Z"
+    },
+    {
+      "id": "3545",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "食事",
+      "description": "食事を実行",
+      "effect_on_lifespan": 1,
+      "action_time": "2024-10-24T05:10:33.997Z"
+    },
+    {
+      "id": "3829",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:34.510Z"
+    },
+    {
+      "id": "50c4",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:34.681Z"
+    },
+    {
+      "id": "4191",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:34.811Z"
+    },
+    {
+      "id": "5d21",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:34.927Z"
+    },
+    {
+      "id": "eb20",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.062Z"
+    },
+    {
+      "id": "453e",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.178Z"
+    },
+    {
+      "id": "ade5",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.310Z"
+    },
+    {
+      "id": "9af3",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.446Z"
+    },
+    {
+      "id": "ca28",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.546Z"
+    },
+    {
+      "id": "e1ac",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.681Z"
+    },
+    {
+      "id": "cbb6",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.813Z"
+    },
+    {
+      "id": "54a9",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:35.930Z"
+    },
+    {
+      "id": "2ee5",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:39.051Z"
+    },
+    {
+      "id": "b9fa",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:39.197Z"
+    },
+    {
+      "id": "135a",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:39.345Z"
+    },
+    {
+      "id": "2312",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:39.477Z"
+    },
+    {
+      "id": "47e1",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:39.645Z"
+    },
+    {
+      "id": "e9c4",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:39.780Z"
+    },
+    {
+      "id": "1bd2",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:39.927Z"
+    },
+    {
+      "id": "4037",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:40.062Z"
+    },
+    {
+      "id": "a446",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:40.748Z"
+    },
+    {
+      "id": "62fc",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:40.949Z"
+    },
+    {
+      "id": "c0e4",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:41.132Z"
+    },
+    {
+      "id": "6d2e",
+      "user_id": 1,
+      "character_id": "2",
+      "action_type": "睡眠",
+      "description": "睡眠を実行",
+      "effect_on_lifespan": 2,
+      "action_time": "2024-10-24T05:10:41.295Z"
+    }
+  ]
+}
