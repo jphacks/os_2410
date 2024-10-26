@@ -35,8 +35,8 @@ export function Create() {
         <h2 className="text-xl font-bold mb-6">新しいキャラクターを作成</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label 
-              htmlFor="characterName" 
+            <label
+              htmlFor="characterName"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               キャラクター名
@@ -54,11 +54,7 @@ export function Create() {
             />
           </div>
 
-          {error && (
-            <div className="text-sm text-red-600">
-              {error}
-            </div>
-          )}
+          {error && <div className="text-sm text-red-600">{error}</div>}
 
           <div className="text-sm text-gray-500">
             <h3 className="font-medium mb-2">初期ステータス:</h3>

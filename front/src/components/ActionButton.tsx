@@ -1,30 +1,21 @@
-import { useCharacter } from '../contexts/CharacterContext';
+import { GameAction } from '../constants/actions';
 
-export function ActionButtons() {
-  const { performAction, isLoading } = useCharacter();
+interface ActionButtonProps {
+  action: GameAction;
+  onClick: (action: GameAction) => void;
+}
 
-  const actions = [
-    { type: '食事' as const, detail: '食事をとる', icon: '🍖' },
-    { type: '睡眠' as const, detail: '睡眠をとる', icon: '😴' },
-    { type: '運動' as const, detail: '運動をする', icon: '🏃' }
-  ];
-
+export function ActionButton({ action, onClick }: ActionButtonProps) {
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <h2 className="text-xl font-bold mb-4">アクション</h2>
-      <div className="grid gap-4">
-        {actions.map(action => (
-          <button
-            key={action.type}
-            onClick={() => performAction(action.type, action.detail)}
-            disabled={isLoading}
-            className="w-full p-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-400 flex items-center gap-2"
-          >
-            <span className="text-xl">{action.icon}</span>
-            <span>{action.detail}</span>
-          </button>
-        ))}
-      </div>
-    </div>
+    <button
+      onClick={() => onClick(action)}
+      className="flex flex-col items-center p-3 bg-white/90 backdrop-blur-sm rounded-lg hover:bg-gray-50 transition-colors shadow-lg"
+    >
+      <span className="text-2xl mb-1">{action.icon}</span>
+      <span className="text-sm font-medium">{action.type}</span>
+      <span className="text-xs text-gray-500 text-center mt-1">
+        {action.description}
+      </span>
+    </button>
   );
 }

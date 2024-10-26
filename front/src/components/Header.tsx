@@ -31,9 +31,10 @@ export function Header() {
                 to={item.path}
                 className={`
                   text-sm font-medium transition-colors
-                  ${location.pathname === item.path
-                    ? 'text-blue-600'
-                    : 'text-gray-600 hover:text-blue-600'
+                  ${
+                    location.pathname === item.path
+                      ? 'text-blue-600'
+                      : 'text-gray-600 hover:text-blue-600'
                   }
                 `}
               >
@@ -51,11 +52,15 @@ export function Header() {
                 </span>
                 <div className="flex items-center space-x-1 text-sm">
                   <span className="text-gray-500">HP:</span>
-                  <span className={`font-medium ${
-                    currentCharacter.health_points > 7 ? 'text-green-600' :
-                    currentCharacter.health_points > 3 ? 'text-yellow-600' :
-                    'text-red-600'
-                  }`}>
+                  <span
+                    className={`font-medium ${
+                      currentCharacter.health_points > 7
+                        ? 'text-green-600'
+                        : currentCharacter.health_points > 3
+                          ? 'text-yellow-600'
+                          : 'text-red-600'
+                    }`}
+                  >
                     {currentCharacter.health_points}/10
                   </span>
                 </div>

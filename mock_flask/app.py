@@ -221,6 +221,8 @@ def create_action():
     
     # キャラクターのステータスを更新
     update_character_status(character, data["action_type"], data.get("detail", ""))
+
+    print(characters[0])
     
     return jsonify({
         "action": new_action,
