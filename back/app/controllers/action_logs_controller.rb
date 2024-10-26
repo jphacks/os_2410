@@ -43,6 +43,13 @@ class ActionLogsController < ApplicationController
     render json: meal_logs
   end
 
+  # ユーザーに紐づくある特定の日の行動ログを取得
+  def user_particular_day_actions
+    @user = User.find(params[:user_id])
+    @particular_day_action_logs = @user.action_logs.where(created_at: params[:date].to_date.all_day)
+    render json: @particular_day_action_logs
+  end
+
   private
 
   def action_log_params

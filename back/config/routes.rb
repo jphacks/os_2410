@@ -21,4 +21,7 @@ Rails.application.routes.draw do
 
   # 特定のキャラクターに関連する行動ログを取得
   get '/characters/:character_id/action_logs', to: 'action_logs#index_by_character'
+
+  # ユーザーに紐づくある特定の日の行動ログを取得
+  get '/users/:user_id/action_logs/:date', to: 'action_logs#user_particular_day_actions'
 end
