@@ -15,4 +15,7 @@ Rails.application.routes.draw do
 
   # 行動ログ取得用のエンドポイント
   get '/users/:id/action', to: 'action_logs#user_actions'
+
+  # 当日の食事ログを取得
+  get '/users/:id/meal', to: 'action_logs#meal_logs'
 end
