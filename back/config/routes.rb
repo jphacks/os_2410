@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # ユーザーに紐づくキャラクターの一覧を取得
   get '/users/:user_id/characters', to: 'characters#index_by_user'
   resources :users, only: [:index, :show, :create, :update, :destroy]
+  post '/characters', to: 'characters#create'
+  options '/characters', to: 'characters#create'
   resources :characters, only: [:index, :show, :create, :update, :destroy]
   resources :action_logs, only: [:index, :show, :create]
 

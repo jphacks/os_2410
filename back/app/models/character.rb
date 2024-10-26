@@ -4,7 +4,6 @@ class Character < ApplicationRecord
 
   validates :character_name, presence: true
   validates :lifespan, numericality: { greater_than_or_equal_to: 0 }
-<<<<<<< HEAD
 
   protected
   # 年齢の更新
@@ -26,6 +25,4 @@ class Character < ApplicationRecord
       save
     end
   end
-=======
->>>>>>> origin/front/develop
 end
