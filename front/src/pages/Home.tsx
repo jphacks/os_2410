@@ -2,8 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useCharacter } from '../contexts/CharacterContext';
 import { useEffect, useState } from 'react';
 import { ActionButton } from '../components/ActionButton';
-import { GAME_ACTIONS, GameAction } from '../constants/actions';
-import clsx from 'clsx'; // クラス名の条件付き結合のために使用
+import { ActionDetail, GAME_ACTIONS, GameAction } from '../constants/actions';
 import CharacterImages from '../components/CharacterImages';
 
 export function Home() {
@@ -14,13 +13,6 @@ export function Home() {
     (typeof actions)[0] | null
   >(null);
   const userId = 1; // 実際の実装では認証から取得
-
-  // 位置ごとにアクションをグループ化する関数
-  const getActionsByPosition = (position: GameAction['position']) => {
-    return GAME_ACTIONS.filter((action) => action.position === position).sort(
-      (a, b) => (a.order || 0) - (b.order || 0),
-    );
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,58 +93,9 @@ export function Home() {
           </div>
         </div>
 
-        {/* 上部のアクション */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 flex gap-4">
-          {getActionsByPosition('top').map((action) => (
-            <ActionButton
-              key={action.type}
-              action={action}
-              onClick={handleActionSelect}
-            />
-          ))}
-        </div>
-
-        {/* 左側のアクション */}
-        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
-          {getActionsByPosition('left').map((action) => (
-            <ActionButton
-              key={action.type}
-              action={action}
-              onClick={handleActionSelect}
-            />
-          ))}
-        </div>
-
-        {/* 右側のアクション */}
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
-          {getActionsByPosition('right').map((action) => (
-            <ActionButton
-              key={action.type}
-              action={action}
-              onClick={handleActionSelect}
-            />
-          ))}
-        </div>
-
-        {/* 中央のアクション */}
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex gap-4">
-          {getActionsByPosition('center').map((action) => (
-            <ActionButton
-              key={action.type}
-              action={action}
-              onClick={handleActionSelect}
-            />
-          ))}
-        </div>
-
-        {/* 下部のアクション */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
-          {getActionsByPosition('bottom').map((action) => (
-            <ActionButton
-              key={action.type}
-              action={action}
-              onClick={handleActionSelect}
-            />
+          {GAME_ACTIONS.map((action) => (
+            <ActionButton action={action} onClick={handleActionSelect} />
           ))}
         </div>
 
@@ -164,13 +107,18 @@ export function Home() {
                 {selectedAction.type}の詳細を選択
               </h3>
               <div className="space-y-2">
-                {selectedAction.details.map((detail) => (
+                {selectedAction.details.map((detail: ActionDetail) => (
                   <button
                     key={detail.value}
                     onClick={() => handleActionDetailSelect(detail.value)}
                     className="w-full p-3 text-left hover:bg-gray-100 rounded-lg transition-colors"
                   >
-                    {detail.label}
+                    <div className="flex justify-between space-x-2">
+                      <p>{detail.label}</p>
+                      <p className="text-slate-500 text-xs self-end justify-self-end">
+                        {detail.description}
+                      </p>
+                    </div>
                   </button>
                 ))}
               </div>
