@@ -10,9 +10,10 @@ export interface GameAction {
   type: ActionType;
   icon: string;
   description: string;
-  details: ActionDetail[];
   position: 'top' | 'right' | 'bottom' | 'left' | 'center';
-  order?: number; // 同じposition内での順序
+  order: number;
+  details: ActionDetail[];
+  imagePath: string; // 画像パスを追加
 }
 
 export const GAME_ACTIONS: GameAction[] = [
@@ -22,6 +23,7 @@ export const GAME_ACTIONS: GameAction[] = [
     description: 'HPが回復し、寿命が延びます',
     position: 'right',
     order: 1,
+    imagePath: '/src/assets/images/bed.png', // 各アクションの画像パス
     details: [
       { label: 'ちゃんと取った', value: 'ちゃんと取った' },
       { label: '軽い食事', value: '軽い食事' },
@@ -35,6 +37,7 @@ export const GAME_ACTIONS: GameAction[] = [
     description: 'HPが大きく回復し、寿命が延びます',
     position: 'left',
     order: 1,
+    imagePath: '/src/assets/images/bed.png', // 各アクションの画像パス
     details: [
       { label: '6時間未満', value: '5' },
       { label: '7-9時間', value: '8' },
@@ -47,6 +50,7 @@ export const GAME_ACTIONS: GameAction[] = [
     description: 'HPが回復しますが、寿命が減ります',
     position: 'bottom',
     order: 1,
+    imagePath: '/src/assets/images/bed.png', // 各アクションの画像パス
     details: [
       { label: '軽い運動', value: '軽い運動' },
       { label: '適度な運動', value: '適度な運動' },
