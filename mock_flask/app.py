@@ -17,9 +17,9 @@ users = [
 
 characters = [
     {
-        "character_id": 1,
+        "id": 1,
         "user_id": 1,
-        "character_name": "Hero",
+        "name": "Hero",
         "age": 5,
         "lifespan": 10,
         "health_points": 10,
