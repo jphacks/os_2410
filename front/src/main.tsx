@@ -14,10 +14,22 @@ import { Create } from './pages/Create';
 import { ErrorPage } from './pages/ErrorPage';
 import './index.css';
 import { MyPage } from './pages/MyPage';
+import { AuthProvider } from './contexts/AuthContext';
+import { SignUp } from './pages/SignUpPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
+    <Route
+      path="/"
+      element={
+        <AuthProvider>
+          <CharacterProvider>
+            <Layout />
+          </CharacterProvider>
+        </AuthProvider>
+      }
+      errorElement={<ErrorPage />}
+    >
       <Route
         index
         element={<Home />}
@@ -40,6 +52,7 @@ const router = createBrowserRouter(
         }}
       />
       <Route path="my-page" element={<MyPage />} />
+      <Route path="sign-up" element={<SignUp />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>,
   ),
@@ -47,8 +60,6 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <CharacterProvider>
-      <RouterProvider router={router} />
-    </CharacterProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
