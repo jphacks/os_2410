@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ActionButton } from '../components/ActionButton';
 import { GAME_ACTIONS, GameAction } from '../constants/actions';
 import clsx from 'clsx'; // クラス名の条件付き結合のために使用
+import CharacterImages from '../components/CharacterImages';
 
 export function Home() {
   const { currentCharacter, fetchUserCharacters, performAction } =
@@ -214,11 +215,26 @@ export function Home() {
               >
                 キャンセル
               </button>
+              </div>
             </div>
+          )}
+
+        {/* // キャラクター表示エリアで画像を差し替える */}
+        <div className="flex-1 flex items-center justify-center">
+          {/* モックキャラクター */}
+          <div
+            className="w-32 h-32 rounded-full flex items-center justify-center"
+            id="myImage"
+          >
+            <CharacterImages character={currentCharacter} />
           </div>
-        )}
+        </div>
+
+        
+        
       </div>
 
+      {/* アニメーションエフェクト用のコンテナ（オプション） */}
       <div
         className="pointer-events-none absolute inset-0"
         id="effects-container"
