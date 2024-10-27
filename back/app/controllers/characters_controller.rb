@@ -22,7 +22,7 @@ class CharactersController < ApplicationController
   # キャラクターを新規作成
   def create
     @character = Character.new(character_params)
-    @character.user_id = current_user.id
+    @character.user_id = params[:user_id]
     @character.age = 0
     @character.lifespan = 7
     @character.health_points = 8

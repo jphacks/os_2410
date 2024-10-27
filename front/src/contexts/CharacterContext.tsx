@@ -138,6 +138,7 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
       try {
         const data = {
           character_name: characterName,
+          user_id: userId,
         };
         console.log("token: ", token?.Authorization);
         const response = await axios.post(`${API_URL}/characters`, data, {

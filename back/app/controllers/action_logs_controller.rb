@@ -18,10 +18,10 @@ class ActionLogsController < ApplicationController
       character = @action_log.character
 
       character_hp_service = CharacterHpService.new(character)
-      character_hp_service.update_hp(@action_log.action_type, @action_log.detail, @action_log.hp_movement)
+      character_hp_service.update_hp(@action_log.action_type, @action_log.detail, @action_log)
 
       character_lifespan_service = CharacterLifespanService.new(character)
-      character_lifespan_service.update_lifespan(@action_log.action_type, @action_log.detail, character.status)
+      character_lifespan_service.update_lifespan(@action_log.action_type, @action_log.detail, character.status, @action_log)
       
       if character.health_points == 0 then
         character.status = 0
