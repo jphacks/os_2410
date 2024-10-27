@@ -24,4 +24,7 @@ Rails.application.routes.draw do
 
   # ユーザーに紐づくある特定の日の行動ログを取得
   get '/users/:user_id/action_logs/:date', to: 'action_logs#user_particular_day_actions'
+
+  # キャラクターが死亡した際の情報を取得
+  get '/characters/:character_id/death', to: 'action_logs#character_death'
 end
