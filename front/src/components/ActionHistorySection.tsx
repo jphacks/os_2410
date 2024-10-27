@@ -12,6 +12,8 @@ export function ActionHistorySection() {
     }>
   >([]);
 
+  console.log("currentCharacter: ",currentCharacter?.character_name);
+
   useEffect(() => {
     const fetchActions = async () => {
       if (!currentCharacter) return;
@@ -29,7 +31,7 @@ export function ActionHistorySection() {
       }
     };
 
-    fetchActions();
+    // fetchActions();
   }, [currentCharacter]);
 
   const getActionIcon = (actionType: string) => {

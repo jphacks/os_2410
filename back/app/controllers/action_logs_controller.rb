@@ -11,7 +11,7 @@ class ActionLogsController < ApplicationController
     @action_log = ActionLog.new(action_log_params)
     # @action_log.user_id = params[:user_id] # user_idがリクエストで渡される場合
     # @action_log.character_id = params[:character_id] # character_idがリクエストで渡される場合
-
+    @action_log.user_id = current_user.id
     # 行動による寿命やHPの変化を計算
     if @action_log.save
       # キャラクターの寿命やステータスを更新（例: 行動に応じて寿命を変更）
@@ -23,7 +23,7 @@ class ActionLogsController < ApplicationController
       character_lifespan_service = CharacterLifespanService.new(character)
       character_lifespan_service.update_lifespan(@action_log.action_type, @action_log.detail, character.status)
 
-      render json: @action_log, status: :created
+      render json: character, status: :created
     else
       render json: @action_log.errors, status: :unprocessable_entity
     end
