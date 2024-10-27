@@ -4,8 +4,7 @@
 **開発コードは[devブランチ](https://github.com/jphacks/os_2410/tree/dev)にあります！！！！！**
 
 ## デモ動画
-YOUTUBEにUP中なので待ってください……
-[![へるぴぃ](room/部屋.png)](/video/デモ_発表.mov)
+[![へるぴぃ](room/部屋.png)](https://youtube.com/shorts/INe-ppj-uPs?feature=share)
 
 ## 製品概要
 - ユーザーの生活習慣の健康度、不健康度をキャラクターの寿命やHPという形で可視化することで、ユーザーに健康的な生活を送るように促すアプリです。
