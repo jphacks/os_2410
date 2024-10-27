@@ -1,8 +1,10 @@
 # 健康促進アプリ「へるぴぃ」
-<!-- 
-[![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2024/07/JPHACKS2024_ogp.jpg)](https://www.youtube.com/watch?v=DZXUkEj-CSI) -->
+![image](/room/発表.png)
 
 **開発コードは[devブランチ](https://github.com/jphacks/os_2410/tree/dev)にあります！！！！！**
+
+## デモ動画
+[![へるぴぃ](room/部屋.png)](/video/デモ_発表.mov)
 
 ## 製品概要
 - ユーザーの生活習慣の健康度、不健康度をキャラクターの寿命やHPという形で可視化することで、ユーザーに健康的な生活を送るように促すアプリです。
@@ -17,10 +19,10 @@
 - 健康を促進するアプリは入力に時間がかかることが多く、飽きたりなどで続かないことがあります。そのため、へるぴぃは直感的かつストレスのないUIを目指し、行動の記録を簡単に行うことができます。
 #### 3. 特長3
 - メンバーがデザインした愛らしいキャラクターが画面上で生活をしています。ユーザーの行動による影響の可視化は実際にHPといった形で定量的に表される以外にも、キャラクターの様子にも反映されます。それにより、よりユーザーは自らの行動に対しての危機感を持つことができ、また、生活への意欲を持つことができます。
-ここに画像いれたい
+![image](/character/状態変化.png)
 
 また日数とともに成長を行うので、ユーザーはキャラクターの成長を楽しみながら生活を改善することができます。
-ここに画像いれたい
+![image](/character/成長状態.png)
 
 
 ### 解決出来ること
@@ -55,7 +57,12 @@
 * Docker
 * PostgreSQL
 
+## 発表資料
+https://www.canva.com/design/DAGUu4zRLto/WChvQazXd7S9Au8VwJBelw/edit?utm_content=DAGUu4zRLto&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 ## 最後に
 Hallo, World!は去年も神戸会場で参加したチームです。去年は技術力が足りず、開発が全く終わらなく悔しい思いをしたのですが、今年は技術力を向上させてきた他、仲間を増やし最高の5人チームを結成し、そしてワクワクするアイデアを持ってきました。
 リベンジということで頑張りました！
 よろしくお願いします！
+
+
+
