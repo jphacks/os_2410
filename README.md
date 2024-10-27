@@ -4,6 +4,7 @@
 **開発コードは[devブランチ](https://github.com/jphacks/os_2410/tree/dev)にあります！！！！！**
 
 ## デモ動画
+YOUTUBEにUP中なので待ってください……
 [![へるぴぃ](room/部屋.png)](/video/デモ_発表.mov)
 
 ## 製品概要
