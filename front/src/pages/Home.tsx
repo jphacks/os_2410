@@ -1,9 +1,8 @@
 import { Navigate } from 'react-router-dom';
 import { useCharacter } from '../contexts/CharacterContext';
 import { useEffect, useState } from 'react';
-import { ActionButton } from '../components/ActionButton';
 import { ActionDetail, GAME_ACTIONS, GameAction } from '../constants/actions';
-import CharacterImages from '../components/CharacterImages';
+import Character_Button from '../components/Character_Button';
 
 export function Home() {
   const { currentCharacter, fetchUserCharacters, performAction } =
@@ -12,7 +11,14 @@ export function Home() {
   const [selectedAction, setSelectedAction] = useState<
     (typeof actions)[0] | null
   >(null);
+  const [endAction, setEndAction] = useState(false);
+  const [isLiveFlg, setIsLiveFlg] = useState(true);
   const userId = 1; // 実際の実装では認証から取得
+
+  if (currentCharacter?.status === 0 && isLiveFlg) {
+    setIsLiveFlg(false);
+    console.log(isLiveFlg);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,98 +62,126 @@ export function Home() {
     }
   };
 
+  const end = () => {
+    setEndAction(true);
+    console.log(endAction);
+  };
+
   return (
-    <div className="absolute inset-0 bg-no-repeat bg-cover bg-center bg-[url('/src/assets/images/background.png')]">
-      <div className="absolute inset-0"  />
+    <>
+      {isLiveFlg && (
+        <div className="absolute inset-0 bg-no-repeat bg-cover bg-center bg-[url('/src/assets/images/background.png')]">
+          <div className="absolute inset-0" />
 
-      <div className="relative h-full flex flex-col">
-        {/* ステータス表示（右上） - 変更なし */}
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4">
-          <div className="space-y-3">
-            <div>
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-sm font-medium">HP</span>
-                <span className="text-sm">
-                  {currentCharacter.health_points}/10
-                </span>
+          <div className="relative h-full flex flex-col">
+            {/* ステータス表示（右上） - 変更なし */}
+            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4">
+              <div className="space-y-3">
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-sm font-medium">HP</span>
+                    <span className="text-sm">
+                      {currentCharacter.health_points}/10
+                    </span>
+                  </div>
+                  <div className="w-32 h-2 bg-gray-200 rounded-full">
+                    <div
+                      className="h-full bg-green-500 rounded-full transition-all duration-300"
+                      style={{
+                        width: `${(currentCharacter.health_points / 10) * 100}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium">寿命</span>
+                  <span className="text-sm">{currentCharacter.lifespan}年</span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium">年齢</span>
+                  <span className="text-sm">{currentCharacter.age}歳</span>
+                </div>
               </div>
-              <div className="w-32 h-2 bg-gray-200 rounded-full">
-                <div
-                  className="h-full bg-green-500 rounded-full transition-all duration-300"
-                  style={{
-                    width: `${(currentCharacter.health_points / 10) * 100}%`,
-                  }}
-                />
-              </div>
             </div>
 
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium">寿命</span>
-              <span className="text-sm">{currentCharacter.lifespan}年</span>
+            <div className="h-full">
+              <Character_Button
+                character={currentCharacter}
+                onClick={handleActionSelect}
+                text={'aaaa'}
+              ></Character_Button>
             </div>
 
-            <div className="flex justify-between items-center">
-              <span className="text-sm font-medium">年齢</span>
-              <span className="text-sm">{currentCharacter.age}歳</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
-          {GAME_ACTIONS.map((action) => (
-            <ActionButton action={action} onClick={handleActionSelect} />
-          ))}
-        </div>
-
-        {/* モーダル */}
-        {selectedAction && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-              <h3 className="text-lg font-semibold mb-4">
-                {selectedAction.type}の詳細を選択
-              </h3>
-              <div className="space-y-2">
-                {selectedAction.details.map((detail: ActionDetail) => (
+            {/* モーダル */}
+            {selectedAction && (
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+                <div className="bg-white rounded-lg p-6 max-w-sm w-full">
+                  <h3 className="text-lg font-semibold mb-4">
+                    {selectedAction.type}の詳細を選択
+                  </h3>
+                  <div className="space-y-2">
+                    {selectedAction.details.map((detail: ActionDetail) => (
+                      <button
+                        key={detail.value}
+                        onClick={() => handleActionDetailSelect(detail.value)}
+                        className="w-full p-3 text-left hover:bg-gray-100 rounded-lg transition-colors"
+                      >
+                        <div className="flex justify-between space-x-2">
+                          <p>{detail.label}</p>
+                          <p className="text-slate-500 text-xs self-end justify-self-end">
+                            {detail.description}
+                          </p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
                   <button
-                    key={detail.value}
-                    onClick={() => handleActionDetailSelect(detail.value)}
-                    className="w-full p-3 text-left hover:bg-gray-100 rounded-lg transition-colors"
+                    onClick={() => setSelectedAction(null)}
+                    className="mt-4 w-full p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
                   >
-                    <div className="flex justify-between space-x-2">
-                      <p>{detail.label}</p>
-                      <p className="text-slate-500 text-xs self-end justify-self-end">
-                        {detail.description}
-                      </p>
-                    </div>
+                    キャンセル
                   </button>
-                ))}
+                </div>
               </div>
+            )}
+          </div>
+
+          <div
+            className="pointer-events-none absolute inset-0"
+            id="effects-container"
+          />
+        </div>
+      )}
+      {!isLiveFlg && (
+        <div className="absolute inset-0 bg-no-repeat bg-cover bg-center bg-[url('/src/assets/images/background.png')]">
+          {!endAction && (
+            <div className="flex flex-col justify-center items-center h-screen">
+              <Character_Button
+                character={currentCharacter}
+                onClick={handleActionSelect}
+                text={'aaaa'}
+              />
               <button
-                onClick={() => setSelectedAction(null)}
-                className="mt-4 w-full p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                onClick={end}
+                className="bg-black/50 rounded- border border-gray-300 hover:bg-gray-100"
               >
-                キャンセル
+                結果
               </button>
             </div>
-          </div>
-        )}
-        {/* // キャラクター表示エリアで画像を差し替える */}
-        <div className="flex-1 flex items-center justify-center">
-          {/* モックキャラクター */}
-          <div
-            className="w-32 h-32 rounded-full flex items-center justify-center"
-            id="myImage"
-          >
-            <CharacterImages character={currentCharacter} />
-          </div>
+          )}
+          {/* モーダル */}
+          {endAction && (
+            <div className="fixed inset-0 rounded-md bg-black/50 items-center justify-center z-50 m-20">
+              <div className="flex flex-col justify-center items-center h-screen">
+                <div>死亡理由</div>
+                <div>グラフ</div>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-
-      {/* アニメーションエフェクト用のコンテナ（オプション） */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        id="effects-container"
-      />
-    </div>
+      )}
+    </>
   );
 }

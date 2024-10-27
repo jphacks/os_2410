@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useCharacter } from '../contexts/CharacterContext';
+import Clock from './Clock';
+import Test from './TimeJudge';
 
 export function Header() {
   const location = useLocation();
@@ -47,23 +49,6 @@ export function Header() {
           <div className="flex items-center space-x-4">
             {currentCharacter ? (
               <div className="flex items-center space-x-3 py-1 px-3 bg-gray-50 rounded-full">
-                <span className="text-sm font-medium text-gray-600">
-                  {currentCharacter.character_name}
-                </span>
-                <div className="flex items-center space-x-1 text-sm">
-                  <span className="text-gray-500">HP:</span>
-                  <span
-                    className={`font-medium ${
-                      currentCharacter.health_points > 7
-                        ? 'text-green-600'
-                        : currentCharacter.health_points > 3
-                          ? 'text-yellow-600'
-                          : 'text-red-600'
-                    }`}
-                  >
-                    {currentCharacter.health_points}/10
-                  </span>
-                </div>
               </div>
             ) : (
               <Link
@@ -73,6 +58,12 @@ export function Header() {
                 キャラクター作成
               </Link>
             )}
+          </div>
+          <div>
+            <Clock></Clock>
+          </div>
+          <div>
+            <Test></Test>
           </div>
         </div>
       </div>

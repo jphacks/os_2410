@@ -86,6 +86,7 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
       if (!response.ok) throw new Error('キャラクター一覧の取得に失敗しました');
 
       const data = await response.json();
+      console.log(data);
       setCharacters(data);
       if (data.length > 0) {
         setCurrentCharacter(data[0]);

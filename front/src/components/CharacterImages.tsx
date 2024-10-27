@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 interface Character {
   health_points: number;
+  status: number;
 }
 
 interface ImageMap {
@@ -15,9 +16,9 @@ const babyImage = {
 };
 
 const yongerImage = {
-  0: '/src/assets/images/tako_baby_sad.png', // HPが5未満のとき
-  5: '/src/assets/images/tako_baby_normal.png', // HPが5以上のとき
-  10: '/src/assets/images/tako_baby_happy.png', // HPが10以上のとき
+  0: '/src/assets/images/tako_yonger_sad.png', // HPが5未満のとき
+  5: '/src/assets/images/tako_yonger_normal.png', // HPが5以上のとき
+  10: '/src/assets/images/tako_yonger_happy.png', // HPが10以上のとき
 };
 
 const olderImage = {
@@ -27,13 +28,20 @@ const olderImage = {
 };
 
 // 寿命を基準にif文で分岐する
-const imageMap: ImageMap = babyImage;
+let imageMap: ImageMap = babyImage;
 
 let x, y;
 
 function CharacterImage({ character }: { character: Character }) {
-
   const myRef = useRef<HTMLDivElement>(null);
+
+  if (character.status == 1) {
+    imageMap = babyImage;
+  } else if (character.status == 2) {
+    imageMap = yongerImage;
+  } else if (character.status == 3) {
+    imageMap = olderImage;
+  }
 
   const [currentImage, setCurrentImage] = useState<string>(
     // 初期画像の設定
@@ -55,9 +63,7 @@ function CharacterImage({ character }: { character: Character }) {
 
   if (myRef.current) {
     const rect = myRef.current.getBoundingClientRect();
-    console.log('x:', rect.x);
     x = rect.x;
-    console.log('y:', rect.y);
     y = rect.y;
   }
 
@@ -86,18 +92,16 @@ function CharacterImage({ character }: { character: Character }) {
     setIsAnimated(!isAnimated);
   };
 
-  // console.log(window.innerWidth)
-
   let char_x, char_y;
 
-  if(+(window.innerWidth/2)>=mousePosition.x){
+  if (+(window.innerWidth / 2) >= mousePosition.x) {
     char_x = mousePosition.x - x;
-  }else{
+  } else {
     char_x = mousePosition.x - x - 125;
   }
-  if(+(window.innerHeight/2)>=mousePosition.y){
+  if (+(window.innerHeight / 2) >= mousePosition.y) {
     char_y = mousePosition.y - y;
-  }else{
+  } else {
     char_y = mousePosition.y - y - 100;
   }
 
