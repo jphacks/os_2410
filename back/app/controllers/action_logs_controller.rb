@@ -18,7 +18,7 @@ class ActionLogsController < ApplicationController
       character = @action_log.character
 
       character_hp_service = CharacterHpService.new(character)
-      character_hp_service.update_hp(@action_log.action_type, @action_log.detail)
+      character_hp_service.update_hp(@action_log.action_type, @action_log.detail, @action_log.hp_movement)
 
       character_lifespan_service = CharacterLifespanService.new(character)
       character_lifespan_service.update_lifespan(@action_log.action_type, @action_log.detail, character.status)
@@ -47,6 +47,13 @@ class ActionLogsController < ApplicationController
     }
 
     render json: meal_logs
+  end
+
+  # ユーザーに紐づくある特定の日の行動ログを取得
+  def user_particular_day_actions
+    @user = User.find(params[:user_id])
+    @particular_day_action_logs = @user.action_logs.where(created_at: params[:date].to_date.all_day)
+    render json: @particular_day_action_logs
   end
 
   private
