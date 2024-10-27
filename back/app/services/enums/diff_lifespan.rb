@@ -1,4 +1,4 @@
-class Character < ApplicationRecord
+class DifflLifespan
   
   # 寿命の変化量を返す
   def status_change(action_type, level, character_status)

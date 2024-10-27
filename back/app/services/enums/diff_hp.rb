@@ -1,4 +1,4 @@
-class Character < ApplicationRecord
+class DiffHp
 
   # HPの変化量を計算するメソッド
   def status_change(action_type, level)
