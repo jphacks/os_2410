@@ -2,7 +2,7 @@ import { Navigate } from 'react-router-dom';
 import { useCharacter } from '../contexts/CharacterContext';
 import { useEffect, useState } from 'react';
 import { ActionButton } from '../components/ActionButton';
-import { GAME_ACTIONS, GameAction } from '../constants/actions';
+import { ActionType, GAME_ACTIONS, GameAction } from '../constants/actions';
 import CharacterImages from '../components/CharacterImages';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -12,6 +12,8 @@ export function Home() {
   const [selectedAction, setSelectedAction] = useState<GameAction | null>(null);
   const { userInfo, token } = useAuth();
   const userId = userInfo?.id;
+
+
 
   if (!userId) {
     return <Navigate to="/sign-in" replace />;
@@ -74,14 +76,14 @@ export function Home() {
               <div className="flex justify-between items-center mb-1">
                 <span className="text-sm font-medium">HP</span>
                 <span className="text-sm">
-                  {currentCharacter.health_points}/10
+                  {currentCharacter.health_points}/15
                 </span>
               </div>
               <div className="w-32 h-2 bg-gray-200 rounded-full">
                 <div
                   className="h-full bg-green-500 rounded-full transition-all duration-300"
                   style={{
-                    width: `${(currentCharacter.health_points / 10) * 100}%`,
+                    width: `${(currentCharacter.health_points / 15) * 100}%`,
                   }}
                 />
               </div>
@@ -89,7 +91,7 @@ export function Home() {
 
             <div className="flex justify-between items-center">
               <span className="text-sm font-medium">寿命</span>
-              <span className="text-sm">{currentCharacter.lifespan}年</span>
+              <span className="text-sm">{Math.floor(currentCharacter.lifespan)}年</span>
             </div>
 
             <div className="flex justify-between items-center">
