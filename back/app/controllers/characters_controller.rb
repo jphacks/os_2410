@@ -19,7 +19,7 @@ class CharactersController < ApplicationController
   # キャラクターを新規作成
   def create
     @character = Character.new(character_params)
-    @character.user_id = params[:user_id]
+    @character.user_id = current_user.id
     @character.age = 0
     @character.lifespan = 7
     @character.health_points = 8
@@ -53,6 +53,6 @@ class CharactersController < ApplicationController
 
   # Strong Parameters
   def character_params
-    params.require(:character).permit(:character_name)
+    params.permit(:character_name)
   end
 end

@@ -1,13 +1,21 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useCharacter } from '../contexts/CharacterContext';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Header() {
   const location = useLocation();
   const { currentCharacter } = useCharacter();
+  const {userInfo, signOut} = useAuth();
+
+  const handleSignOut = () => {
+    signOut()
+  }
 
   const navigation = [
     { name: 'ホーム', path: '/' },
     { name: 'マイページ', path: '/my-page' },
+    { name: 'サインイン', path: '/sign-in' },
+    { name: 'サインアップ', path: '/sign-up' },
   ];
 
   return (
@@ -15,12 +23,9 @@ export function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo/Title */}
-          <div className="flex items-center">
-            <h1 className="text-xl font-bold text-gray-900">
-              <Link to="/" className="hover:text-blue-600 transition-colors">
-                Life Extension
-              </Link>
-            </h1>
+          <div className='flex space-x-2'>
+            <p>userid:{userInfo?.id}</p>
+            <p>name:{userInfo?.username}</p>
           </div>
 
           {/* Navigation */}
@@ -42,6 +47,9 @@ export function Header() {
               </Link>
             ))}
           </nav>
+          <div>
+            <button className='hover:bg-gray-300 p-2 rounded-md' onClick={handleSignOut}>サインアウト</button>
+          </div>
 
           {/* Character Status Summary */}
           <div className="flex items-center space-x-4">

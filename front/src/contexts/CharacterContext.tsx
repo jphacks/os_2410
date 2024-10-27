@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface Character {
-  character_id: number;
+  id: number;
   user_id: number;
   character_name: string;
   age: number;
@@ -34,6 +34,9 @@ import {
   useCallback,
   ReactNode,
 } from 'react';
+import axios from 'axios';
+import { useAuth } from './AuthContext';
+import { GameAction } from '../constants/actions';
 // import { User, Character, Action } from '../types/api';
 
 interface CharacterContextType {
@@ -77,17 +80,29 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
   const [actions, setActions] = useState<Action[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { token } = useAuth();
 
   const fetchUserCharacters = useCallback(async (userId: number) => {
+    console.log('fetchUserCharacterを実行');
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_URL}/users/${userId}/characters`);
-      if (!response.ok) throw new Error('キャラクター一覧の取得に失敗しました');
-      const data = await response.json();
-      setCharacters(data);
-      if (data.length > 0) {
-        setCurrentCharacter(data[0]);
+      const response = await axios.get(
+        `${API_URL}/users/${userId}/characters`,
+        {
+          headers: {
+            Authorization: token?.Authorization,
+          },
+        },
+      );
+
+      const characters = await response.data;
+
+      console.log("characters: ", characters);
+      setCharacters(characters);
+      console.log("currentCharacter: ", currentCharacter);
+      if (characters.length > 0) {
+        setCurrentCharacter(characters[0]);
       }
     } catch (err) {
       setError(
@@ -121,18 +136,19 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch(`${API_URL}/characters`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            user_id: userId,
-            character_name: characterName,
-          }),
+        const data = {
+          character_name: characterName,
+        };
+        console.log("token: ", token?.Authorization);
+        const response = await axios.post(`${API_URL}/characters`, data, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: token?.Authorization,
+          },
         });
 
-        if (!response.ok) throw new Error('キャラクターの作成に失敗しました');
-
-        const created = await response.json();
+        const created = await response.data;
+        console.log(created);
         setCharacters([created]);
         setCurrentCharacter(created);
       } catch (err) {
@@ -147,46 +163,43 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
     [],
   );
 
-  // performAction を新しいAPIに合わせて修正
   const performAction = useCallback(
-    async (actionType: Action['action_type'], detail: string) => {
+    async (action: GameAction, selectedDetail: { value: string }) => {
       if (!currentCharacter) return;
       setIsLoading(true);
       setError(null);
-
+  
       try {
-        // /actions/create エンドポイントを呼び出し
-        const response = await fetch(`${API_URL}/actions/create`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            user_id: currentCharacter.user_id,
-            character_id: currentCharacter.character_id,
-            action_type: actionType,
-            detail: detail,
-          }),
+        // APIに送信するデータを準備
+        const data = {
+          user_id: currentCharacter.user_id,
+          character_id: currentCharacter.id,
+          action_type: action.type,
+          detail: selectedDetail.value,
+        };
+
+        console.log("data: ", data);
+  
+        // /action_logsエンドポイントを呼び出し
+        const response = await axios.post(`${API_URL}/action_logs`, data, {
+          headers: { Authorization: token?.Authorization },
         });
+  
+        // レスポンスから更新されたキャラクター情報を取得
+        const character = await response.data;
 
-        if (!response.ok) {
-          throw new Error('アクションの実行に失敗しました');
-        }
-
-        // レスポンスには更新されたアクションと キャラクター情報の両方が含まれる
-        const { action, character } = await response.json();
-
+        console.log("character: ", character);
+  
         // 現在のキャラクター情報を更新
         setCurrentCharacter(character);
-
+  
         // キャラクター一覧を更新
         setCharacters((prevCharacters) =>
           prevCharacters.map((char) =>
-            char.character_id === character.character_id ? character : char,
+            char.id === character.id ? character : char,
           ),
         );
-
-        // アクション履歴を更新
-        setActions((prevActions) => [...prevActions, action]);
-
+  
         // キャラクターが死亡した場合の処理
         if (character.status === 0) {
           setError('キャラクターが死亡しました');
@@ -199,7 +212,7 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
         setIsLoading(false);
       }
     },
-    [currentCharacter],
+    [currentCharacter, token],
   );
 
   // アクション履歴取得

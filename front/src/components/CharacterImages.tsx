@@ -55,9 +55,9 @@ function CharacterImage({ character }: { character: Character }) {
 
   if (myRef.current) {
     const rect = myRef.current.getBoundingClientRect();
-    console.log('x:', rect.x);
+    // console.log('x:', rect.x);
     x = rect.x;
-    console.log('y:', rect.y);
+    // console.log('y:', rect.y);
     y = rect.y;
   }
 
