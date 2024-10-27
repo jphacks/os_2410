@@ -16,6 +16,7 @@ import './index.css';
 import { MyPage } from './pages/MyPage';
 import { AuthProvider } from './contexts/AuthContext';
 import { SignUp } from './pages/SignUpPage';
+import { SignIn } from './pages/SignInPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,6 +54,7 @@ const router = createBrowserRouter(
       />
       <Route path="my-page" element={<MyPage />} />
       <Route path="sign-up" element={<SignUp />} />
+      <Route path="sign-in" element={<SignIn />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>,
   ),

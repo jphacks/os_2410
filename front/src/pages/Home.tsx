@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ActionButton } from '../components/ActionButton';
 import { ActionDetail, GAME_ACTIONS, GameAction } from '../constants/actions';
 import CharacterImages from '../components/CharacterImages';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Home() {
   const { currentCharacter, fetchUserCharacters, performAction } =
@@ -12,7 +13,12 @@ export function Home() {
   const [selectedAction, setSelectedAction] = useState<
     (typeof actions)[0] | null
   >(null);
-  const userId = 1; // 実際の実装では認証から取得
+  const { userInfo, token } = useAuth()
+  const userId = userInfo?.id
+
+  if (!userId) {
+    return <Navigate to="/sign-in" replace />;
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +43,7 @@ export function Home() {
   }
 
   if (!currentCharacter) {
+    console.log("カレントキャラクターがないため、/createにリダイレクト")
     return <Navigate to="/create" replace />;
   }
 
