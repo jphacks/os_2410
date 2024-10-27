@@ -10,5 +10,7 @@ class CharacterLifespanService
     diff_lifespan = DifflLifespan.new
     lifespan_change = diff_lifespan.status_change(action_type, level, character_status)
     @character.update(lifespan: @character.lifespan + lifespan_change)
+    action_log = lifespan_change
+    save
   end
 end
