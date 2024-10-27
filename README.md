@@ -54,7 +54,6 @@
 * Ruby on Rails
 * React
 * TypeScript
-* Tailwind CSS
 * Docker
 * PostgreSQL
 
