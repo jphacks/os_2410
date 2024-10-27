@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface Character {
-  character_id: number;
+  id: number;
   user_id: number;
   character_name: string;
   age: number;
@@ -36,6 +36,7 @@ import {
 } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
+import { GameAction } from '../constants/actions';
 // import { User, Character, Action } from '../types/api';
 
 interface CharacterContextType {
@@ -96,7 +97,10 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
       );
 
       const characters = await response.data;
+
+      console.log("characters: ", characters);
       setCharacters(characters);
+      console.log("currentCharacter: ", currentCharacter);
       if (characters.length > 0) {
         setCurrentCharacter(characters[0]);
       }
@@ -159,41 +163,43 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
     [],
   );
 
-  // performAction を新しいAPIに合わせて修正
   const performAction = useCallback(
-    async (actionType: Action['action_type'], detail: string) => {
+    async (action: GameAction, selectedDetail: { value: string }) => {
       if (!currentCharacter) return;
       setIsLoading(true);
       setError(null);
-
+  
       try {
-        // /actions/create エンドポイントを呼び出し
+        // APIに送信するデータを準備
         const data = {
           user_id: currentCharacter.user_id,
-          character_id: currentCharacter.character_id,
-          action_type: actionType,
-          detail: detail,
+          character_id: currentCharacter.id,
+          action_type: action.type,
+          detail: selectedDetail.value,
         };
+
+        console.log("data: ", data);
+  
+        // /action_logsエンドポイントを呼び出し
         const response = await axios.post(`${API_URL}/action_logs`, data, {
           headers: { Authorization: token?.Authorization },
         });
+  
+        // レスポンスから更新されたキャラクター情報を取得
+        const character = await response.data;
 
-        // レスポンスには更新されたアクションと キャラクター情報の両方が含まれる
-        const { character } = await response.data();
-
+        console.log("character: ", character);
+  
         // 現在のキャラクター情報を更新
         setCurrentCharacter(character);
-
+  
         // キャラクター一覧を更新
         setCharacters((prevCharacters) =>
           prevCharacters.map((char) =>
-            char.character_id === character.character_id ? character : char,
+            char.id === character.id ? character : char,
           ),
         );
-
-        // アクション履歴を更新
-        setActions((prevActions) => [...prevActions, action]);
-
+  
         // キャラクターが死亡した場合の処理
         if (character.status === 0) {
           setError('キャラクターが死亡しました');
@@ -206,7 +212,7 @@ export function CharacterProvider({ children }: { children: ReactNode }) {
         setIsLoading(false);
       }
     },
-    [currentCharacter],
+    [currentCharacter, token],
   );
 
   // アクション履歴取得

@@ -2,19 +2,16 @@ import { Navigate } from 'react-router-dom';
 import { useCharacter } from '../contexts/CharacterContext';
 import { useEffect, useState } from 'react';
 import { ActionButton } from '../components/ActionButton';
-import { ActionDetail, GAME_ACTIONS, GameAction } from '../constants/actions';
+import { GAME_ACTIONS, GameAction } from '../constants/actions';
 import CharacterImages from '../components/CharacterImages';
 import { useAuth } from '../contexts/AuthContext';
 
 export function Home() {
-  const { currentCharacter, fetchUserCharacters, performAction } =
-    useCharacter();
+  const { currentCharacter, fetchUserCharacters, performAction } = useCharacter();
   const [isInitialLoading, setIsInitialLoading] = useState(true);
-  const [selectedAction, setSelectedAction] = useState<
-    (typeof actions)[0] | null
-  >(null);
-  const { userInfo, token } = useAuth()
-  const userId = userInfo?.id
+  const [selectedAction, setSelectedAction] = useState<GameAction | null>(null);
+  const { userInfo, token } = useAuth();
+  const userId = userInfo?.id;
 
   if (!userId) {
     return <Navigate to="/sign-in" replace />;
@@ -43,18 +40,18 @@ export function Home() {
   }
 
   if (!currentCharacter) {
-    console.log("カレントキャラクターがないため、/createにリダイレクト")
+    console.log("カレントキャラクターがないため、/createにリダイレクト");
     return <Navigate to="/create" replace />;
   }
 
-  const handleActionSelect = (action: (typeof actions)[0]) => {
+  const handleActionSelect = (action: GameAction) => {
     setSelectedAction(action);
   };
 
-  const handleActionDetailSelect = async (detail: string) => {
+  const handleActionDetailSelect = async (detail: { value: string }) => {
     if (selectedAction) {
       try {
-        await performAction(selectedAction.type, detail);
+        await performAction(selectedAction, detail);
       } catch (error) {
         console.error('Action failed:', error);
       } finally {
@@ -63,12 +60,14 @@ export function Home() {
     }
   };
 
+  console.log("home, currentCharacter: ", currentCharacter);
+
   return (
     <div className="absolute inset-0 bg-no-repeat bg-cover bg-center bg-[url('/src/assets/images/background.png')]">
-      <div className="absolute inset-0"  />
+      <div className="absolute inset-0" />
 
       <div className="relative h-full flex flex-col">
-        {/* ステータス表示（右上） - 変更なし */}
+        {/* ステータス表示（右上） */}
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4">
           <div className="space-y-3">
             <div>
@@ -103,7 +102,11 @@ export function Home() {
         {/* 行動一覧 */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
           {GAME_ACTIONS.map((action) => (
-            <ActionButton key={action.type} action={action} onClick={handleActionSelect} />
+            <ActionButton
+              key={action.type}
+              action={action}
+              onClick={handleActionSelect}
+            />
           ))}
         </div>
 
@@ -115,17 +118,15 @@ export function Home() {
                 {selectedAction.type}の詳細を選択
               </h3>
               <div className="space-y-2">
-                {selectedAction.details.map((detail: ActionDetail) => (
+                {selectedAction.details.map((detail) => (
                   <button
                     key={detail.value}
-                    onClick={() => handleActionDetailSelect(detail.value)}
+                    onClick={() => handleActionDetailSelect(detail)}
                     className="w-full p-3 text-left hover:bg-gray-100 rounded-lg transition-colors"
                   >
-                    <div className="flex justify-between space-x-2">
-                      <p>{detail.label}</p>
-                      <p className="text-slate-500 text-xs self-end justify-self-end">
-                        {detail.description}
-                      </p>
+                    <div className="font-medium">{detail.label}</div>
+                    <div className="text-sm text-gray-600">
+                      {detail.description}
                     </div>
                   </button>
                 ))}
@@ -139,9 +140,9 @@ export function Home() {
             </div>
           </div>
         )}
-        {/* // キャラクター表示エリアで画像を差し替える */}
+
+        {/* キャラクター表示エリア */}
         <div className="flex-1 flex items-center justify-center">
-          {/* モックキャラクター */}
           <div
             className="w-32 h-32 rounded-full flex items-center justify-center"
             id="myImage"
@@ -151,7 +152,6 @@ export function Home() {
         </div>
       </div>
 
-      {/* アニメーションエフェクト用のコンテナ（オプション） */}
       <div
         className="pointer-events-none absolute inset-0"
         id="effects-container"

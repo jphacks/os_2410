@@ -9,6 +9,11 @@ class CharacterHpService
   def update_hp(action_type, level)
     diffhp = DiffHp.new
     hp_change = diffhp.status_change(action_type, level)
-    @character.update(health_points: @character.health_points + hp_change)
+    hp = @character.health_points + hp_change
+    if hp >= 15
+      @character.update(health_points: 15)
+    else
+      @character.update(health_points: hp)
+    end
   end
-end
+end 
